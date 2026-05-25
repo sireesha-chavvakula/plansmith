@@ -1,0 +1,77 @@
+[
+  {
+    "Plan": {
+      "Node Type": "Limit",
+      "Parallel Aware": false,
+      "Async Capable": false,
+      "Startup Cost": 0.0,
+      "Total Cost": 4521.18,
+      "Plan Rows": 50,
+      "Plan Width": 44,
+      "Actual Startup Time": 7421.18,
+      "Actual Total Time": 7421.36,
+      "Actual Rows": 50,
+      "Actual Loops": 1,
+      "Plans": [
+        {
+          "Node Type": "Nested Loop",
+          "Parent Relationship": "Outer",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Join Type": "Inner",
+          "Startup Cost": 0.0,
+          "Total Cost": 4521.18,
+          "Plan Rows": 12,
+          "Plan Width": 44,
+          "Actual Startup Time": 7421.16,
+          "Actual Total Time": 7421.33,
+          "Actual Rows": 50,
+          "Actual Loops": 1,
+          "Inner Unique": false,
+          "Plans": [
+            {
+              "Node Type": "Seq Scan",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Relation Name": "orders",
+              "Alias": "o",
+              "Startup Cost": 0.0,
+              "Total Cost": 3185.32,
+              "Plan Rows": 2,
+              "Plan Width": 28,
+              "Actual Startup Time": 0.06,
+              "Actual Total Time": 6112.41,
+              "Actual Rows": 248317,
+              "Actual Loops": 1,
+              "Filter": "((customer_id = $1) AND (placed_at >= (now() - '90 days'::interval)))",
+              "Rows Removed by Filter": 9751683
+            },
+            {
+              "Node Type": "Index Scan",
+              "Parent Relationship": "Inner",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Scan Direction": "Forward",
+              "Index Name": "order_items_order_id_idx",
+              "Relation Name": "order_items",
+              "Alias": "i",
+              "Startup Cost": 0.42,
+              "Total Cost": 6.21,
+              "Plan Rows": 6,
+              "Plan Width": 24,
+              "Actual Startup Time": 0.003,
+              "Actual Total Time": 0.0052,
+              "Actual Rows": 0,
+              "Actual Loops": 248317,
+              "Index Cond": "(order_id = o.id)"
+            }
+          ]
+        }
+      ]
+    },
+    "Planning Time": 0.184,
+    "Triggers": [],
+    "Execution Time": 7421.41
+  }
+]

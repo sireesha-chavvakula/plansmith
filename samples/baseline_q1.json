@@ -1,0 +1,79 @@
+[
+  {
+    "Plan": {
+      "Node Type": "Limit",
+      "Parallel Aware": false,
+      "Async Capable": false,
+      "Startup Cost": 12.45,
+      "Total Cost": 198.32,
+      "Plan Rows": 50,
+      "Plan Width": 44,
+      "Actual Startup Time": 0.412,
+      "Actual Total Time": 14.821,
+      "Actual Rows": 50,
+      "Actual Loops": 1,
+      "Plans": [
+        {
+          "Node Type": "Nested Loop",
+          "Parent Relationship": "Outer",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Join Type": "Inner",
+          "Startup Cost": 12.45,
+          "Total Cost": 1184.91,
+          "Plan Rows": 282,
+          "Plan Width": 44,
+          "Actual Startup Time": 0.41,
+          "Actual Total Time": 14.78,
+          "Actual Rows": 50,
+          "Actual Loops": 1,
+          "Inner Unique": false,
+          "Plans": [
+            {
+              "Node Type": "Index Scan",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Scan Direction": "Backward",
+              "Index Name": "orders_customer_placed_idx",
+              "Relation Name": "orders",
+              "Alias": "o",
+              "Startup Cost": 0.43,
+              "Total Cost": 312.21,
+              "Plan Rows": 47,
+              "Plan Width": 28,
+              "Actual Startup Time": 0.04,
+              "Actual Total Time": 1.92,
+              "Actual Rows": 50,
+              "Actual Loops": 1,
+              "Index Cond": "((customer_id = $1) AND (placed_at >= (now() - '90 days'::interval)))",
+              "Rows Removed by Index Recheck": 0
+            },
+            {
+              "Node Type": "Index Scan",
+              "Parent Relationship": "Inner",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Scan Direction": "Forward",
+              "Index Name": "order_items_order_id_idx",
+              "Relation Name": "order_items",
+              "Alias": "i",
+              "Startup Cost": 0.42,
+              "Total Cost": 18.4,
+              "Plan Rows": 6,
+              "Plan Width": 24,
+              "Actual Startup Time": 0.01,
+              "Actual Total Time": 0.24,
+              "Actual Rows": 6,
+              "Actual Loops": 50,
+              "Index Cond": "(order_id = o.id)"
+            }
+          ]
+        }
+      ]
+    },
+    "Planning Time": 0.612,
+    "Triggers": [],
+    "Execution Time": 14.91
+  }
+]

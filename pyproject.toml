@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plansmith"
+version = "0.1.0"
+description = "Local-first Postgres slow-query triage with Gemma 4 E4B"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+dependencies = [
+  "requests>=2.31",
+  "flask>=3.0",
+  "rich>=13.7",
+]
+
+[project.scripts]
+plansmith = "plansmith.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["plansmith*"]
